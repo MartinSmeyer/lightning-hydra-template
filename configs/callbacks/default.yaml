@@ -15,3 +15,8 @@ early_stopping:
   mode: "max" # can be "max" or "min"
   patience: 100 # how many epochs of not improving until training stops
   min_delta: 0 # minimum change in the monitored metric needed to qualify as an improvement
+
+pytorch_lightning_pruning_callback:
+  _target_: optuna.integration.PyTorchLightningPruningCallback
+  trial: null
+  monitor: "val/acc"

@@ -6,6 +6,7 @@
 
 defaults:
   - override /hydra/sweeper: optuna
+  # - override /hydra/launcher: submitit_slurm
 
 # choose metric which will be optimized by Optuna
 optimized_metric: "val/acc"
@@ -17,14 +18,14 @@ hydra:
   sweeper:
     _target_: hydra_plugins.hydra_optuna_sweeper.optuna_sweeper.OptunaSweeper
     storage: null
-    study_name: null
-    n_jobs: 1
+    study_name: 'mnist_optimize'
+    n_jobs: 2
 
     # 'minimize' or 'maximize' the objective
     direction: maximize
 
     # number of experiments that will be executed
-    n_trials: 20
+    n_trials: 50
 
     # choose Optuna hyperparameter sampler
     # learn more here: https://optuna.readthedocs.io/en/stable/reference/samplers.html
@@ -58,3 +59,12 @@ hydra:
       model.lin3_size:
         type: categorical
         choices: [32, 64, 128, 256, 512]
+  # launcher:
+  #   name: ${hydra.job.name}
+  #   _target_: hydra_plugins.hydra_submitit_launcher.submitit_launcher.SlurmLauncher
+  #   partition: 'RMC-C01-BATCH'
+  #   timeout_min: 6000
+  #   gpus_per_node: 1
+  #   cpus_per_task: 4
+  #   mem_gb: 10
+  #   exclude: rmc-gpu03
