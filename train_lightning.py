@@ -93,7 +93,8 @@ def train(config: DictConfig) -> Optional[float]:
             wandb.finish()
     
     # Print path to best checkpoint
-    log.info(f"Best checkpoint path:\n{trainer.checkpoint_callback.best_model_path}")
+    if not config.trainer.get("fast_dev_run"):
+        log.info(f"Best model ckpt: {trainer.checkpoint_callback.best_model_path}")
 
     return optimized_metric
 
