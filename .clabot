@@ -1,6 +1,6 @@
 {
-  "contributors": ["MartinSmeyer"],
+  "contributors": [""],
   "message": "Sign the cla!",
   "label": "cla-signed",
-  "recheckComment": "please really signe the cla"
+  "recheckComment": "Rechecking the cla status"
 }
